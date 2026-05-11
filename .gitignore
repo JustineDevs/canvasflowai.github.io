@@ -1,0 +1,12 @@
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+
+.omx/logs/
+.omx/state/
+.omx/metrics.json
+.omx/tmux-hook.json
+
+.DS_Store
+Thumbs.db
