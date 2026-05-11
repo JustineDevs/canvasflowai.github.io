@@ -1,12 +1,17 @@
 node_modules/
 .next/
 out/
+coverage/
 *.tsbuildinfo
+*.log
 
-.omx/logs/
-.omx/state/
-.omx/metrics.json
-.omx/tmux-hook.json
+.omx/
+
+.wrangler/
+.dev.vars
+.env
+.env.*
+!.env.example
 
 .DS_Store
 Thumbs.db
