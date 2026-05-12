@@ -4,6 +4,7 @@ import {
   createDefaultScene,
   moveElement,
   removeElement,
+  reorderElement,
   resetScene,
   resizeElement,
 } from "@/lib/scene/reducer";
@@ -35,5 +36,13 @@ describe("scene reducer helpers", () => {
 
     expect(removed.elements).toHaveLength(scene.elements.length - 1);
     expect(reset.elements).toHaveLength(scene.elements.length);
+  });
+
+  it("reorders an element without losing the scene", () => {
+    const scene = createDefaultScene();
+    const movedForward = reorderElement(scene, scene.elements[0].id, "forward");
+
+    expect(movedForward.elements[1].id).toBe(scene.elements[0].id);
+    expect(movedForward.elements).toHaveLength(scene.elements.length);
   });
 });

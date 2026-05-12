@@ -14,6 +14,7 @@ describe("ReadmePreview", () => {
     render(<ReadmePreview draft={draft} summary={summary} />);
 
     expect(screen.getByText(/estimated size/i)).toBeInTheDocument();
+    expect(screen.getByText(/format/i)).toBeInTheDocument();
     expect(screen.getByText(/within budget/i)).toBeInTheDocument();
   });
 });

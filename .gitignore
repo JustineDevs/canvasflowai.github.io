@@ -9,6 +9,7 @@ coverage/
 
 .wrangler/
 .dev.vars
+.secrets.act
 .env
 .env.*
 !.env.example

@@ -2,7 +2,7 @@
 
 **Purpose**: Validate specification completeness and quality before proceeding to planning
 **Created**: 2026-05-11
-**Feature**: `specs/001-canvasflow-mvp/spec.md`
+**Feature**: [spec.md](/mnt/c/users/justinedevs/downloads/canvasflowai/specs/001-canvasflow-mvp/spec.md)
 
 ## Content Quality
 

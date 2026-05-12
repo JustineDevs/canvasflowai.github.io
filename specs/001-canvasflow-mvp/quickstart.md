@@ -16,3 +16,4 @@ export readiness without configuring any provider.
 ## Backend Follow-Up
 - When cloud-backed generation is added, deploy the trusted API surface as a Cloudflare Worker.
 - Keep Worker-specific secrets and provider credentials out of the static frontend.
+- Use the Worker `health`, `status`, and `generate` routes to validate end-to-end provider wiring.

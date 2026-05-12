@@ -54,12 +54,41 @@ export function moveElement(scene: Scene, elementId: string, position: Pick<Scen
   };
 }
 
-export function resizeElement(scene: Scene, elementId: string, size: Pick<SceneElement, "width" | "height">): Scene {
+export function resizeElement(
+  scene: Scene,
+  elementId: string,
+  size: Pick<SceneElement, "width" | "height">,
+): Scene {
   return {
     ...scene,
     elements: scene.elements.map((element) =>
       element.id === elementId ? { ...element, ...size } : { ...element },
     ),
+  };
+}
+
+export function reorderElement(scene: Scene, elementId: string, direction: "forward" | "backward"): Scene {
+  const currentIndex = scene.elements.findIndex((element) => element.id === elementId);
+  if (currentIndex === -1) {
+    return scene;
+  }
+
+  const targetIndex =
+    direction === "forward"
+      ? Math.min(scene.elements.length - 1, currentIndex + 1)
+      : Math.max(0, currentIndex - 1);
+
+  if (currentIndex === targetIndex) {
+    return scene;
+  }
+
+  const elements = cloneElements(scene);
+  const [element] = elements.splice(currentIndex, 1);
+  elements.splice(targetIndex, 0, element);
+
+  return {
+    ...scene,
+    elements: elements.map((item, index) => ({ ...item, zIndex: index })),
   };
 }
 

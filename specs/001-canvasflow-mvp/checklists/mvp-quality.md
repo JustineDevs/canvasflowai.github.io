@@ -3,7 +3,7 @@
 **Purpose**: Validate the MVP requirements for clarity, coverage, and release-readiness before
 implementation expands beyond the first build slice.
 **Created**: 2026-05-11
-**Feature**: `specs/001-canvasflow-mvp/spec.md`
+**Feature**: [spec.md](/mnt/c/users/justinedevs/downloads/canvasflowai/specs/001-canvasflow-mvp/spec.md)
 
 ## Requirement Completeness
 

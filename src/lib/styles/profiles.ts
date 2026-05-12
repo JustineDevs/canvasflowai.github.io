@@ -22,5 +22,7 @@ export const styleProfiles: StyleProfile[] = [
 ];
 
 export function getStyleProfile(styleProfileId: string): StyleProfile {
-  return styleProfiles.find((profile) => profile.id === styleProfileId) ?? styleProfiles[0];
+  return (
+    styleProfiles.find((profile) => profile.id === styleProfileId) ?? styleProfiles[0]
+  );
 }

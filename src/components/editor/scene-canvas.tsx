@@ -1,12 +1,25 @@
+"use client";
+
+import dynamic from "next/dynamic";
 import type { Scene } from "@/lib/scene/types";
+
+const SceneStage = dynamic(
+  () => import("./scene-stage").then((module) => module.SceneStage),
+  {
+    ssr: false,
+    loading: () => <div className="h-[270px] rounded-[1.5rem] bg-slate-100" />,
+  },
+);
 
 interface SceneCanvasProps {
   scene: Scene;
   onNudge: (elementId: string, axis: "x" | "y", delta: number) => void;
+  onReorder: (elementId: string, direction: "forward" | "backward") => void;
+  onResize: (elementId: string, delta: number) => void;
   onRemove: (elementId: string) => void;
 }
 
-export function SceneCanvas({ scene, onNudge, onRemove }: SceneCanvasProps) {
+export function SceneCanvas({ scene, onNudge, onReorder, onResize, onRemove }: SceneCanvasProps) {
   return (
     <section className="rounded-[2rem] border border-slate-200 bg-[#f7f3e8] p-5 shadow-sm">
       <div className="flex items-center justify-between">
@@ -20,9 +33,15 @@ export function SceneCanvas({ scene, onNudge, onRemove }: SceneCanvasProps) {
       </div>
 
       <div className="mt-4 rounded-[1.75rem] border border-dashed border-slate-300 bg-[linear-gradient(135deg,#fff9ec_0%,#edf7ff_100%)] p-4">
+        <div className="overflow-x-auto rounded-[1.5rem] bg-white/60 p-3">
+          <SceneStage scene={scene} />
+        </div>
         <div className="grid gap-3 md:grid-cols-2">
           {scene.elements.map((element) => (
-            <article key={element.id} className="rounded-2xl border border-white/70 bg-white/80 p-4 shadow-sm">
+            <article
+              key={element.id}
+              className="rounded-2xl border border-white/70 bg-white/80 p-4 shadow-sm"
+            >
               <div className="flex items-center justify-between gap-3">
                 <div>
                   <h3 className="text-sm font-semibold text-slate-900">{element.label}</h3>
@@ -38,12 +57,67 @@ export function SceneCanvas({ scene, onNudge, onRemove }: SceneCanvasProps) {
                   Remove
                 </button>
               </div>
-              <div className="mt-4 h-16 rounded-2xl" style={{ backgroundColor: element.color }} />
+              <div
+                className="mt-4 h-16 rounded-2xl"
+                style={{ backgroundColor: element.color }}
+              />
               <div className="mt-4 flex flex-wrap gap-2 text-xs text-slate-600">
-                <button className="rounded-full border border-slate-200 px-3 py-1 hover:border-slate-400" onClick={() => onNudge(element.id, "x", -20)} type="button">Left</button>
-                <button className="rounded-full border border-slate-200 px-3 py-1 hover:border-slate-400" onClick={() => onNudge(element.id, "x", 20)} type="button">Right</button>
-                <button className="rounded-full border border-slate-200 px-3 py-1 hover:border-slate-400" onClick={() => onNudge(element.id, "y", -20)} type="button">Up</button>
-                <button className="rounded-full border border-slate-200 px-3 py-1 hover:border-slate-400" onClick={() => onNudge(element.id, "y", 20)} type="button">Down</button>
+                <button
+                  className="rounded-full border border-slate-200 px-3 py-1 hover:border-slate-400"
+                  onClick={() => onNudge(element.id, "x", -20)}
+                  type="button"
+                >
+                  Left
+                </button>
+                <button
+                  className="rounded-full border border-slate-200 px-3 py-1 hover:border-slate-400"
+                  onClick={() => onNudge(element.id, "x", 20)}
+                  type="button"
+                >
+                  Right
+                </button>
+                <button
+                  className="rounded-full border border-slate-200 px-3 py-1 hover:border-slate-400"
+                  onClick={() => onNudge(element.id, "y", -20)}
+                  type="button"
+                >
+                  Up
+                </button>
+                <button
+                  className="rounded-full border border-slate-200 px-3 py-1 hover:border-slate-400"
+                  onClick={() => onNudge(element.id, "y", 20)}
+                  type="button"
+                >
+                  Down
+                </button>
+                <button
+                  className="rounded-full border border-slate-200 px-3 py-1 hover:border-slate-400"
+                  onClick={() => onResize(element.id, 20)}
+                  type="button"
+                >
+                  Size +
+                </button>
+                <button
+                  className="rounded-full border border-slate-200 px-3 py-1 hover:border-slate-400"
+                  onClick={() => onResize(element.id, -20)}
+                  type="button"
+                >
+                  Size -
+                </button>
+                <button
+                  className="rounded-full border border-slate-200 px-3 py-1 hover:border-slate-400"
+                  onClick={() => onReorder(element.id, "forward")}
+                  type="button"
+                >
+                  Bring forward
+                </button>
+                <button
+                  className="rounded-full border border-slate-200 px-3 py-1 hover:border-slate-400"
+                  onClick={() => onReorder(element.id, "backward")}
+                  type="button"
+                >
+                  Send back
+                </button>
               </div>
             </article>
           ))}

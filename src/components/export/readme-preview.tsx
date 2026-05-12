@@ -16,11 +16,21 @@ export function ReadmePreview({ draft, summary }: ReadmePreviewProps) {
       </div>
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
         <div className="rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-700">
-          <span className="block text-xs uppercase tracking-[0.18em] text-slate-500">Estimated size</span>
+          <span className="block text-xs uppercase tracking-[0.18em] text-slate-500">
+            Estimated size
+          </span>
           {(draft.estimatedBytes / 1024).toFixed(0)} KB
         </div>
         <div className="rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-700">
-          <span className="block text-xs uppercase tracking-[0.18em] text-slate-500">Within budget</span>
+          <span className="block text-xs uppercase tracking-[0.18em] text-slate-500">
+            Format
+          </span>
+          {draft.format.toUpperCase()}
+        </div>
+        <div className="rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-700">
+          <span className="block text-xs uppercase tracking-[0.18em] text-slate-500">
+            Within budget
+          </span>
           {draft.withinBudget ? "Yes" : "No"} · {draft.withinBudget ? "Ready to export" : "Needs compression"}
         </div>
       </div>

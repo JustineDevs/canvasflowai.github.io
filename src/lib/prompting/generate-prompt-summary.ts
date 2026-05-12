@@ -43,7 +43,9 @@ export function generatePromptSummary(scene: Scene): PromptSummary {
 
   return {
     title: `${style.name} Developer Diorama`,
-    body: `A ${style.tone} developer portrait featuring ${persona.label.toLowerCase()} with ${techLabels || "ambient environment details"}.`,
+    body: `A ${style.tone} developer portrait featuring ${persona.label.toLowerCase()} with ${
+      techLabels || "ambient environment details"
+    }.`,
     relationships,
   };
 }
