@@ -1,0 +1,7 @@
+APIMART_API_KEY=replace-me
+APIMART_BASE_URL=https://api.apimart.example
+APIMART_GENERATE_PATH=/v1/images/generations
+LAOZHANG_API_KEY=replace-me
+LAOZHANG_BASE_URL=https://api.laozhang.example
+LAOZHANG_GENERATE_PATH=/v1/images/generations
+ALLOWED_ORIGIN=http://localhost:3000

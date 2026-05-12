@@ -1,0 +1,13 @@
+pre-commit:
+  parallel: true
+  commands:
+    eslint:
+      glob: "*.{js,jsx,ts,tsx}"
+      run: pnpm exec eslint --max-warnings=0 {staged_files}
+    typecheck:
+      run: pnpm exec tsc --noEmit
+
+pre-push:
+  commands:
+    verify:
+      run: pnpm verify
